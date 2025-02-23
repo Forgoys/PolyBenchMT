@@ -101,3 +101,7 @@ PolyBenchMT 是 PolyBench 基准测试套件的修改版本，专门针对 MT-30
 make clean
 make
 ```
+
+### 许可证
+
+本项目采用 BSD 3-Clause 许可证 - 查看 [LICENSE](LICENSE) 文件了解详细信息。
