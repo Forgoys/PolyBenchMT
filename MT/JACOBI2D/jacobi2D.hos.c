@@ -108,8 +108,7 @@ void runJacobi2DDSP(int tsteps, int n, DATA_TYPE POLYBENCH_2D(A, N, N, n, n), DA
 
 /* DCE code. Must scan the entire live-out data.
    Can be used also to check the correctness of the output. */
-static void print_array(int n, DATA_TYPE POLYBENCH_2D(A, N, N, n, n))
-{
+static void print_array(int n, DATA_TYPE POLYBENCH_2D(A, N, N, n, n)) {
     int i, j;
 
     for (i = 0; i < n; i++)
@@ -136,10 +135,10 @@ int main(int argc, char **argv) {
         return 0;
     }
 
-    POLYBENCH_2D_ARRAY_DECL(a,DATA_TYPE,N,N,n,n, clusterId, HT_MEM_RW);
-	POLYBENCH_2D_ARRAY_DECL(b,DATA_TYPE,N,N,n,n, clusterId, HT_MEM_RW);
-	POLYBENCH_2D_ARRAY_DECL(a_outputFromDsp,DATA_TYPE,N,N,n,n, clusterId, HT_MEM_RW);
-	POLYBENCH_2D_ARRAY_DECL(b_outputFromDsp,DATA_TYPE,N,N,n,n, clusterId, HT_MEM_RW);
+    POLYBENCH_2D_ARRAY_DECL(a, DATA_TYPE, N, N, n, n, clusterId, HT_MEM_RW);
+    POLYBENCH_2D_ARRAY_DECL(b, DATA_TYPE, N, N, n, n, clusterId, HT_MEM_RW);
+    POLYBENCH_2D_ARRAY_DECL(a_outputFromDsp, DATA_TYPE, N, N, n, n, clusterId, HT_MEM_RW);
+    POLYBENCH_2D_ARRAY_DECL(b_outputFromDsp, DATA_TYPE, N, N, n, n, clusterId, HT_MEM_RW);
 
     init_array(n, POLYBENCH_ARRAY(a), POLYBENCH_ARRAY(b));
 
@@ -147,6 +146,7 @@ int main(int argc, char **argv) {
 
 #ifdef RUN_ON_CPU
 
+    init_array(n, POLYBENCH_ARRAY(a), POLYBENCH_ARRAY(b));
     /* Start CPU timer. */
     polybench_timer_start(&t_CPU_start);
 

@@ -35,3 +35,4 @@ Thumbs.db
 # ========== 项目生成目录 ==========
 bin/
 results/
+compile_logs/

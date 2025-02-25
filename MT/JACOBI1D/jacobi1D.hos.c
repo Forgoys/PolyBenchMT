@@ -136,6 +136,8 @@ int main(int argc, char **argv) {
 
 #ifdef RUN_ON_CPU
 
+    init_array(n, POLYBENCH_ARRAY(a), POLYBENCH_ARRAY(b));
+
     /* Start CPU timer. */
     polybench_timer_start(&t_CPU_start);
 

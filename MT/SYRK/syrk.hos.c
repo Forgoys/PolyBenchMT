@@ -151,6 +151,7 @@ int main() {
             &t_DSP_start, &t_DSP_end);
 
 #ifdef RUN_ON_CPU
+    init_arrays(ni, nj, &alpha, &beta, POLYBENCH_ARRAY(C), POLYBENCH_ARRAY(A));
 
     /* Start CPU timer. */
     polybench_timer_start(&t_CPU_start);

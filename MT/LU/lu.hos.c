@@ -138,6 +138,7 @@ int main(int argc, char *argv[]) {
     luDSP(n, POLYBENCH_ARRAY(A), POLYBENCH_ARRAY(A_outputFromDsp), &t_DSP_start, &t_DSP_end);
 
 #ifdef RUN_ON_CPU
+    init_array(n, POLYBENCH_ARRAY(A));
 
     /* Start CPU timer. */
     polybench_timer_start(&t_CPU_start);

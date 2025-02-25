@@ -190,7 +190,6 @@ void adiDSP(int tsteps, int n, DATA_TYPE POLYBENCH_2D(A, N, N, n, n), DATA_TYPE 
 
     // 插入计时结束代码
     polybench_timer_stop(t_DSP_end);
-    
 }
 
 int main(int argc, char *argv[]) {
@@ -220,6 +219,7 @@ int main(int argc, char *argv[]) {
            POLYBENCH_ARRAY(X_outputFromDsp), &t_DSP_start, &t_DSP_end);
 
 #ifdef RUN_ON_CPU
+    init_array(n, POLYBENCH_ARRAY(A), POLYBENCH_ARRAY(B), POLYBENCH_ARRAY(X));
 
     /* Start CPU timer. */
     polybench_timer_start(&t_CPU_start);
