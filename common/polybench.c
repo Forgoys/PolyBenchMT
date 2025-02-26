@@ -1,10 +1,3 @@
-/**
- * polybench.c: This file is part of the PolyBench/C 3.2 test suite.
- *
- *
- * Contact: Louis-Noel Pouchet <pouchet@cse.ohio-state.edu>
- * Web address: http://polybench.sourceforge.net
- */
 #include <assert.h>
 #include <math.h>
 #include <sched.h>

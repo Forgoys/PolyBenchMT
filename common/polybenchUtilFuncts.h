@@ -1,7 +1,3 @@
-//polybenchUtilFuncts.h
-//Scott Grauer-Gray (sgrauerg@gmail.com)
-//Functions used across codes
-
 #ifndef POLYBENCH_UTIL_FUNCTS_H
 #define POLYBENCH_UTIL_FUNCTS_H
 
