@@ -36,3 +36,4 @@ Thumbs.db
 bin/
 results/
 compile_logs/
+CUDA/
