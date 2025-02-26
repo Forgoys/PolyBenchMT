@@ -19,10 +19,12 @@ __global__ void gemm_kernel(int ni, int nj, int nk, DATA_TYPE alpha, DATA_TYPE b
         int j = idx % nj;
         
         // Original computation logic
-        c[i * nj + j] *= beta;
+        DATA_TYPE tmp = c[i * nj + j];
+        tmp *= beta;
         for (int k = 0; k < nk; ++k) {
-            c[i * nj + j] += alpha * a[i * nk + k] * b[k * nj + j];
+            tmp += alpha * a[i * nk + k] * b[k * nj + j];
         }
+        c[i * nj + j] = tmp;
     }
 }
 
