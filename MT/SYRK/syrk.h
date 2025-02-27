@@ -49,7 +49,7 @@
 # define _PB_NJ POLYBENCH_LOOP_BOUND(NJ,nj)
 
 # ifndef DATA_TYPE
-#  define DATA_TYPE float
+#  define DATA_TYPE double
 #  define DATA_PRINTF_MODIFIER "%0.2lf "
 # endif
 
