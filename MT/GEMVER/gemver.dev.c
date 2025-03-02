@@ -43,12 +43,13 @@ __global__ void gemver_kernel2(int n, DATA_TYPE alpha, DATA_TYPE beta, DATA_TYPE
         end_idx = start_idx + elements_per_thread;
     }
 
-    for (int i = start_idx; i < end_idx; ++i) {
-        DATA_TYPE tmp = 0.0;
-        for (int j = 0; j < _PB_N; j++) {
-            tmp += beta * a[j * N + i] * y[j];
+    for (int j = 0; j < _PB_N; j++) {
+        for (int i = start_idx; i < end_idx; ++i) {
+            x[i] += beta * a[j * N + i] * y[j];
         }
-        x[i] += z[i] + tmp;
+    }
+    for (int i = start_idx; i < end_idx; ++i) {
+        x[i] += z[i];
     }
 }
 

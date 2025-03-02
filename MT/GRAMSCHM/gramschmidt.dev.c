@@ -55,14 +55,15 @@ __global__ void gramschmidt_kernel3(int ni, int nj, int k, DATA_TYPE *a, DATA_TY
 
     for (int j = start_idx; j < end_idx; ++j) {
         r[k * NJ + j] = 0.0;
-        DATA_TYPE tmp = 0.0;
-        for (int i = 0; i < _PB_NI; i++) {
-            tmp += q[i * NJ + k] * a[i * NJ + j];
+    }
+    for (int i = 0; i < _PB_NI; i++) {
+        for (int j = start_idx; j < end_idx; ++j) {
+            r[k * NJ + j] += q[i * NJ + k] * a[i * NJ + j];
         }
-        r[k * NJ + j] = tmp;
-        tmp = r[k * NJ + j];
-        for (int i = 0; i < _PB_NI; i++) {
-            a[i * NJ + j] -= q[i * NJ + k] * tmp;
+    }
+    for (int i = 0; i < _PB_NI; i++) {
+        for (int j = start_idx; j < end_idx; ++j) {
+            a[i * NJ + j] -= q[i * NJ + k] * r[k * NJ + j];
         }
     }
 }

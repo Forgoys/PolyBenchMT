@@ -2,29 +2,29 @@
 #include "hthread_device.h"
 #include <compiler/m3000.h>
 
-__global__ void gemm_kernel(int ni, int nj, int nk, DATA_TYPE alpha, DATA_TYPE beta, DATA_TYPE *a, DATA_TYPE *b, DATA_TYPE *c)
-{
+__global__ void gemm_kernel(int ni, int nj, int nk, DATA_TYPE alpha, DATA_TYPE beta, DATA_TYPE *a, DATA_TYPE *b, DATA_TYPE *c) {
     int thread_id = get_thread_id();
     int group_size = get_group_size();
-    
+
     int total_elements = ni * nj;
     int elements_per_thread = total_elements / group_size;
     int remainder = total_elements % group_size;
-    
+
     int start = thread_id * elements_per_thread + (thread_id < remainder ? thread_id : remainder);
     int end = start + elements_per_thread + (thread_id < remainder ? 1 : 0);
-    
+
     for (int idx = start; idx < end; ++idx) {
         int i = idx / nj;
         int j = idx % nj;
-        
-        // Original computation logic
-        DATA_TYPE tmp = c[i * nj + j];
-        tmp *= beta;
-        for (int k = 0; k < nk; ++k) {
-            tmp += alpha * a[i * nk + k] * b[k * nj + j];
+        c[i * nj + j] *= beta;
+    }
+    
+    for (int k = 0; k < nk; ++k) {
+        for (int idx = start; idx < end; ++idx) {
+            int i = idx / nj;
+            int j = idx % nj;
+            c[i * nj + j] += alpha * a[i * nk + k] * b[k * nj + j];
         }
-        c[i * nj + j] = tmp;
     }
 }
 

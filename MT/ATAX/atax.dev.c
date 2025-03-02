@@ -62,13 +62,13 @@ __global__ void atax_kernel2(int nx, int ny, DATA_TYPE *A, DATA_TYPE *y, DATA_TY
         end_idx = start_idx + elements_per_thread;
     }
 
-    // 处理分配给当前线程的任务范围
     for (int j = start_idx; j < end_idx; j++) {
         y[j] = 0;
-        DATA_TYPE tmpp = y[j];
-        for (int i = 0; i < nx; i++) {
-            tmpp += A[i * ny + j] * tmp[i];
+    }
+
+    for (int i = 0; i < nx; i++) {
+        for (int j = start_idx; j < end_idx; j++) {
+            y[j] += A[i * ny + j] * tmp[i];
         }
-        y[j] = tmpp;
     }
 }

@@ -44,11 +44,9 @@ __global__ void mvt_kernel2(int n, DATA_TYPE *a, DATA_TYPE *x2, DATA_TYPE *y_2) 
         end_idx = start_idx + elements_per_thread;
     }
 
-    for (int i = start_idx; i < end_idx; ++i) {
-        DATA_TYPE tmp = (DATA_TYPE)0.0;
-        for (int j = 0; j < _PB_N; j++) {
-            tmp += a[j * N + i] * y_2[j];
+    for (int j = 0; j < _PB_N; j++) {
+        for (int i = start_idx; i < end_idx; ++i) {
+            x2[i] += a[j * N + i] * y_2[j];
         }
-        x2[i] += tmp;
     }
 }
