@@ -221,16 +221,16 @@ int main(int argc, char *argv[]) {
 
     init_array(ni, nj, nk, nl, nm, POLYBENCH_ARRAY(A), POLYBENCH_ARRAY(B), POLYBENCH_ARRAY(C), POLYBENCH_ARRAY(D));
 
-    mm3DSP(ni, nj, nk, nl, nm, POLYBENCH_ARRAY(A), POLYBENCH_ARRAY(B), POLYBENCH_ARRAY(C), POLYBENCH_ARRAY(D), POLYBENCH_ARRAY(E),
-           POLYBENCH_ARRAY(F), POLYBENCH_ARRAY(G), POLYBENCH_ARRAY(G_outputFromDSP), &t_DSP_start, &t_DSP_end);
+    mm3DSP(ni, nj, nk, nl, nm, POLYBENCH_ARRAY(E), POLYBENCH_ARRAY(A), POLYBENCH_ARRAY(B), POLYBENCH_ARRAY(F), POLYBENCH_ARRAY(C),
+           POLYBENCH_ARRAY(D), POLYBENCH_ARRAY(G), POLYBENCH_ARRAY(G_outputFromDSP), &t_DSP_start, &t_DSP_end);
 #ifdef RUN_ON_CPU
 
     init_array(ni, nj, nk, nl, nm, POLYBENCH_ARRAY(A), POLYBENCH_ARRAY(B), POLYBENCH_ARRAY(C), POLYBENCH_ARRAY(D));
     /* Start CPU timer. */
     polybench_timer_start(&t_CPU_start);
 
-    mm3(ni, nj, nk, nl, nm, POLYBENCH_ARRAY(A), POLYBENCH_ARRAY(B), POLYBENCH_ARRAY(C), POLYBENCH_ARRAY(D), POLYBENCH_ARRAY(E),
-        POLYBENCH_ARRAY(F), POLYBENCH_ARRAY(G));
+    mm3(ni, nj, nk, nl, nm, POLYBENCH_ARRAY(E), POLYBENCH_ARRAY(A), POLYBENCH_ARRAY(B), POLYBENCH_ARRAY(F), POLYBENCH_ARRAY(C),
+        POLYBENCH_ARRAY(D), POLYBENCH_ARRAY(G));
 
     /* Stop CPU timer. */
     polybench_timer_stop(&t_CPU_end);
