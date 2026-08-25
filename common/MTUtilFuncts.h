@@ -138,15 +138,18 @@ void polybench_PM_print(const char *func_name, int cluster_id, int num_threads, 
 
 float percentDiff(double val1, double val2)
 {
-    // 两个值都接近零时
-    if ((fabs(val1) < 0.01) && (fabs(val2) < 0.01)) {
-        return 0.0f;
-    } else {
-        // 更标准的百分比差异计算
-        double max_val = (fabs(val1) > fabs(val2)) ? fabs(val1) : fabs(val2);
-        if (max_val < SMALL_FLOAT_VAL)
-            max_val = SMALL_FLOAT_VAL; // 防止除以零
-
-        return 100.0f * (fabs(val1 - val2) / max_val);
+    // NaN 和无穷值均视为验证失败
+    if (!isfinite(val1) || !isfinite(val2)) {
+        return INFINITY;
     }
+
+    double diff = fabs(val1 - val2);
+    double max_val = fmax(fabs(val1), fabs(val2));
+
+    // 两个值都接近零时使用绝对误差
+    if (max_val < SMALL_FLOAT_VAL) {
+        return diff < SMALL_FLOAT_VAL ? 0.0f : INFINITY;
+    }
+
+    return (float)(100.0 * diff / max_val);
 }
