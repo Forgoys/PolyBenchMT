@@ -139,14 +139,14 @@ void polybench_PM_print(const char *func_name, int cluster_id, int num_threads, 
 float percentDiff(double val1, double val2)
 {
     // 两个值都接近零时
-    if ((abs(val1) < 0.01) && (abs(val2) < 0.01)) {
+    if ((fabs(val1) < 0.01) && (fabs(val2) < 0.01)) {
         return 0.0f;
     } else {
         // 更标准的百分比差异计算
-        double max_val = (abs(val1) > abs(val2)) ? abs(val1) : abs(val2);
+        double max_val = (fabs(val1) > fabs(val2)) ? fabs(val1) : fabs(val2);
         if (max_val < SMALL_FLOAT_VAL)
             max_val = SMALL_FLOAT_VAL; // 防止除以零
 
-        return 100.0f * (abs(val1 - val2) / max_val);
+        return 100.0f * (fabs(val1 - val2) / max_val);
     }
 }
